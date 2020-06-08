@@ -3,13 +3,15 @@ package com.codecool.moviereactorapplication.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Component
 public class Room {
-    private Integer id;
+    private int id;
     private String name;
-    private Integer capacity;
+    private int capacity;
 
 }
