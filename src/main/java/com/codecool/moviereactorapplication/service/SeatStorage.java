@@ -2,7 +2,6 @@ package com.codecool.moviereactorapplication.service;
 
 import com.codecool.moviereactorapplication.model.Room;
 import com.codecool.moviereactorapplication.model.Seat;
-import lombok.Data;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
