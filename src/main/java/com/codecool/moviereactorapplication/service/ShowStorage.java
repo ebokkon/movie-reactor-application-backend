@@ -14,4 +14,11 @@ public class ShowStorage {
     public List<Show> getShows() {
         return shows;
     }
+
+    public Show getShowById(Integer showId) throws Exception {
+        return this.shows.stream()
+                .filter(show -> show.getId().equals(showId))
+                .findFirst()
+                .orElseThrow(() -> new Exception("The searched show not found with id: " + showId));
+    }
 }
