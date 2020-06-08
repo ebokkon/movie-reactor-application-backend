@@ -15,9 +15,9 @@ public class RoomCreator {
 
 
     public List<Room> createRooms(int numberOfRooms) {
-        
+
         List<Room> rooms = new ArrayList<>();
-        for (int roomId = 1; roomId < numberOfRooms; roomId++) {
+        for (int roomId = 1; roomId < numberOfRooms+1; roomId++) {
             String name = roomNames.get(random.nextInt(roomNames.size()));
             Room newRoom = new Room(roomId, name, 2, 3);
             rooms.add(newRoom);
