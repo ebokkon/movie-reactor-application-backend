@@ -18,7 +18,7 @@ public class SeatStorage {
     @Autowired
     public SeatStorage(SeatCreator seatCreator, Room room) {
         this.seatCreator = seatCreator;
-        seatStorage = seatCreator.createSeatsForRoom(room, 2, 3);
+        seatStorage = seatCreator.createSeatsForRoom(room);
     }
 
     public List<Seat> getSeatsByRoomId(int roomId) {
