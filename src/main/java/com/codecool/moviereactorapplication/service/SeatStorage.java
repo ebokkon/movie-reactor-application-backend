@@ -16,9 +16,12 @@ public class SeatStorage {
     private @Getter List<Seat> seatStorage = new ArrayList<>();
 
     @Autowired
-    public SeatStorage(SeatCreator seatCreator, Room room) {
+    public SeatStorage(SeatCreator seatCreator, RoomStorage roomStorage) {
         this.seatCreator = seatCreator;
-        seatStorage = seatCreator.createSeatsForRoom(room);
+
+        for (Room room : roomStorage.getRoomStorage()) {
+            seatStorage = seatCreator.createSeatsForRoom(room);
+        }
     }
 
     public List<Seat> getSeatsByRoomId(int roomId) {

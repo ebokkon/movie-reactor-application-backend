@@ -15,13 +15,13 @@ public class RoomCreator {
 
 
     public List<Room> createRooms(int numberOfRooms) {
-
+        System.out.println("This is the room creator.");
         List<Room> rooms = new ArrayList<>();
         for (int roomId = 1; roomId < numberOfRooms+1; roomId++) {
             String name = roomNames.get(random.nextInt(roomNames.size()));
             Room newRoom = new Room(roomId, name, 2, 3);
             rooms.add(newRoom);
-
+            System.out.println(newRoom.toString());
         }
         return rooms;
     }

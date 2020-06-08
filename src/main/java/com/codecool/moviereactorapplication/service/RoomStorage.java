@@ -26,4 +26,8 @@ public class RoomStorage {
         }
         return null;
     }
+
+    public List<Room> getRoomStorage() {
+        return roomStorage;
+    }
 }
