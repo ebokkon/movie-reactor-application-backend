@@ -4,6 +4,7 @@ import com.codecool.moviereactorapplication.model.Movie;
 import com.codecool.moviereactorapplication.model.Room;
 import com.codecool.moviereactorapplication.model.Show;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -16,10 +17,12 @@ import java.util.Random;
 public class ShowCreator {
     private final List<Movie> movieStorage;
     private static int showId = 1;
+    private RoomStorage roomStorage;
 
     @Autowired
-    public ShowCreator(MovieStorage movieStorage) {
+    public ShowCreator(MovieStorage movieStorage, RoomStorage roomStorage) {
         this.movieStorage = movieStorage.getMovieStorage();
+        this. roomStorage = roomStorage;
     }
 
     public List<Show> createShows() {
@@ -41,8 +44,8 @@ public class ShowCreator {
         for (int i = 0; i < 7; i++) {
             LocalTime startingTime = LocalTime.of(12, 0);
             for (int j = 0; j < moviesPerDay; j++) {
-                Movie randomMovie = movieStorage.get(random.nextInt(movieStorage.size())); // Válasszon egy random filmet, adja hozzá.
-                createdSchedule.add(new Show(showId++, fromDate, startingTime, randomMovie, new Room()));
+                Movie randomMovie = movieStorage.get(random.nextInt(movieStorage.size()));
+                createdSchedule.add(new Show(showId++, fromDate, startingTime, randomMovie, roomStorage.getRoomById(1)));
                 startingTime = startingTime.plusHours(2);
             }
             fromDate = fromDate.plusDays(1);
