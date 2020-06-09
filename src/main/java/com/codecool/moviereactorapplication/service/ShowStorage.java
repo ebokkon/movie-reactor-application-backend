@@ -1,22 +1,27 @@
 package com.codecool.moviereactorapplication.service;
 
 import com.codecool.moviereactorapplication.model.Show;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ShowStorage {
 
-    private List<Show> shows = new ArrayList<>();
+    private final List<Show> showStorage;
+
+    @Autowired
+    public ShowStorage(ShowCreator showCreator) {
+        this.showStorage = showCreator.createShows();
+    }
 
     public List<Show> getShows() {
-        return shows;
+        return showStorage;
     }
 
     public Show getShowById(Integer showId) throws Exception {
-        return this.shows.stream()
+        return this.showStorage.stream()
                 .filter(show -> show.getId().equals(showId))
                 .findFirst()
                 .orElseThrow(() -> new Exception("The searched show not found with id: " + showId));
