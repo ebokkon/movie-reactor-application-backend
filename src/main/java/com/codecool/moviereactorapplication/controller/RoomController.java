@@ -12,7 +12,7 @@ public class RoomController {
     @Autowired
     private RoomStorage roomStorage;
 
-
+    @CrossOrigin
     @GetMapping("/{id}")
     public Room getRoom(@PathVariable("id") Integer id) throws Exception {
         return roomStorage.getRoomById(id);

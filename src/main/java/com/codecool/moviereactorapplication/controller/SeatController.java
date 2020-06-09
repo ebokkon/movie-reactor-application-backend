@@ -5,6 +5,7 @@ import com.codecool.moviereactorapplication.model.SeatReserved;
 import com.codecool.moviereactorapplication.service.SeatReservedStorage;
 import com.codecool.moviereactorapplication.service.SeatStorage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,11 +24,13 @@ public class SeatController {
         this.seatReservedStorage = seatReservedStorage;
     }
 
+    @CrossOrigin
     @GetMapping("/seat/room/{id}")
     public List<Seat> getSeatByRoomId(@PathVariable("id") int roomId) throws Exception {
         return seatStorage.getSeatsByRoomId(roomId);
     }
 
+    @CrossOrigin
     @GetMapping("/reserved-seats/show/{id}")
     public List<SeatReserved> getReservedSeatsByShowId(@PathVariable("id") int showId) throws Exception {
         return seatReservedStorage.getReservedSeatsByShowId(showId);
