@@ -12,8 +12,12 @@ import java.util.List;
 @RestController
 public class ShowController {
 
+    private final ShowStorage showStorage;
+
     @Autowired
-    private ShowStorage showStorage;
+    public ShowController(ShowStorage showStorage) {
+        this.showStorage = showStorage;
+    }
 
     @GetMapping("/schedule")
     public List<Show> allShows() {
@@ -30,6 +34,4 @@ public class ShowController {
         }
         return new Show();
     }
-
-
 }
