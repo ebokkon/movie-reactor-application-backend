@@ -5,7 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Data
 @NoArgsConstructor
@@ -13,7 +14,8 @@ import java.time.LocalDateTime;
 @Service
 public class Show {
     private Integer id;
-    private LocalDateTime showtime;
+    private LocalDate startingDate;
+    private LocalTime startingTime;
+    private Movie movie;
     private Room room;
-
 }
