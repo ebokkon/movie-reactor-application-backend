@@ -15,7 +15,7 @@ public class MovieStorage {
 
     @Autowired
     public MovieStorage(MovieCreator movieCreator) {
-        List<Integer> movieIds = Arrays.asList(111, 150, 200, 500, 1500, 55, 60, 30, 90, 110);
+        List<Integer> movieIds = Arrays.asList(496243, 530915, 495764, 514847, 475557, 556678, 111, 122, 155, 501907);
 
         this.movieCreator = movieCreator;
         this.movieStorage = movieCreator.createNumberedUniqueMoviesByIds(movieIds, 5);
