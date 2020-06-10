@@ -18,7 +18,7 @@ public class MovieStorage {
         List<Integer> movieIds = Arrays.asList(111, 150, 200, 500, 1500, 55, 60, 30, 90, 110);
 
         this.movieCreator = movieCreator;
-        this.movieStorage = movieCreator.createMoviesByIds(movieIds);
+        this.movieStorage = movieCreator.createNumberedUniqueMoviesByIds(movieIds, 5);
     }
 
     public List<Movie> getMovieStorage() {
