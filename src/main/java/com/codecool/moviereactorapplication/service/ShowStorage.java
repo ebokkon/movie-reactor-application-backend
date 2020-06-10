@@ -14,8 +14,7 @@ public class ShowStorage {
 
     @Autowired
     public ShowStorage(ShowCreator showCreator) {
-        //this.showStorage = showCreator.createShows();
-        this.showStorage = showCreator.createWeeklySchedule(LocalDate.of(2020,6,11), 5);
+        this.showStorage = showCreator.createWeeklySchedule(LocalDate.of(2020, 6, 11));
     }
 
     public List<Show> getShows() {
