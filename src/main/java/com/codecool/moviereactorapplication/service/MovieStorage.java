@@ -24,4 +24,8 @@ public class MovieStorage {
     public List<Movie> getMovieStorage() {
         return movieStorage;
     }
+
+    public List<Movie> getAllMovie() {
+        return this.movieStorage;
+    }
 }
