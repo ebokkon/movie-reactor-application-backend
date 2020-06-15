@@ -9,12 +9,9 @@ import java.util.List;
 
 @Service
 public class SeatReservedStorage {
-    private List<SeatReserved> seatReservedStorage;
-    private SeatReservedCreator seatReservedCreator;
+    private final List<SeatReserved> seatReservedStorage;
 
-    @Autowired
     public SeatReservedStorage(SeatReservedCreator seatReservedCreator) {
-        this.seatReservedCreator = seatReservedCreator;
         this.seatReservedStorage = seatReservedCreator.createReservedSeats();
     }
 
