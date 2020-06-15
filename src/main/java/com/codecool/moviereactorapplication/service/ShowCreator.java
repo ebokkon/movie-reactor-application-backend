@@ -3,7 +3,6 @@ package com.codecool.moviereactorapplication.service;
 import com.codecool.moviereactorapplication.model.Movie;
 import com.codecool.moviereactorapplication.model.Room;
 import com.codecool.moviereactorapplication.model.Show;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -15,9 +14,8 @@ import java.util.List;
 public class ShowCreator {
     private final List<Movie> movieStorage;
     private final RoomStorage roomStorage;
-    private static int showId = 1;
+    private int showId = 1;
 
-    @Autowired
     public ShowCreator(MovieStorage movieStorage, RoomStorage roomStorage) {
         this.movieStorage = movieStorage.getMovieStorage();
         this.roomStorage = roomStorage;
