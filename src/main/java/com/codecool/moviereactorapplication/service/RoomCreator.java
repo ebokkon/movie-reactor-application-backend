@@ -10,7 +10,7 @@ import java.util.Random;
 
 @Component
 public class RoomCreator {
-    private static List<String> roomNames = Arrays.asList("Patkós Irma", "Huszárik Zoltán", "Uránia");
+    private final List<String> roomNames = Arrays.asList("Patkós Irma", "Huszárik Zoltán", "Uránia");
     Random random = new Random();
 
 
@@ -25,5 +25,4 @@ public class RoomCreator {
         }
         return rooms;
     }
-
 }
