@@ -1,7 +1,6 @@
 package com.codecool.moviereactorapplication.service;
 
 import com.codecool.moviereactorapplication.model.Show;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -9,10 +8,8 @@ import java.util.List;
 
 @Service
 public class ShowStorage {
-
     private final List<Show> showStorage;
 
-    @Autowired
     public ShowStorage(ShowCreator showCreator) {
         this.showStorage = showCreator.createWeeklySchedule(LocalDate.of(2020, 6, 11));
     }
