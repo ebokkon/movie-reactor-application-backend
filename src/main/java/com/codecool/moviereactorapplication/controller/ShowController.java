@@ -1,7 +1,7 @@
 package com.codecool.moviereactorapplication.controller;
 
-import com.codecool.moviereactorapplication.model.Show;
-import com.codecool.moviereactorapplication.service.ShowStorage;
+import com.codecool.moviereactorapplication.entity.Show;
+import com.codecool.moviereactorapplication.repository.ShowRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,26 +12,19 @@ import java.util.List;
 @CrossOrigin
 @RestController
 public class ShowController {
+    private final ShowRepository showRepository;
 
-    private final ShowStorage showStorage;
-
-    public ShowController(ShowStorage showStorage) {
-        this.showStorage = showStorage;
+    public ShowController(ShowRepository showRepository) {
+        this.showRepository = showRepository;
     }
 
     @GetMapping("/schedule")
-    public List<Show> allShows() {
-        return showStorage.getShows();
+    public List<com.codecool.moviereactorapplication.entity.Show> allShows() {
+        return showRepository.findAll();
     }
 
     @GetMapping("/show/{showId}")
-    public Show getShowById(@PathVariable String showId) {
-        try {
-            Integer id = Integer.parseInt(showId);
-            return showStorage.getShowById(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return new Show();
+    public Show getShowById(@PathVariable("showId") Long showId) {
+        return showRepository.getShowById(showId);
     }
 }
