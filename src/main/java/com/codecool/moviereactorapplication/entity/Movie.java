@@ -1,6 +1,7 @@
 package com.codecool.moviereactorapplication.entity;
 
 import com.codecool.moviereactorapplication.model.MovieType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import javax.persistence.*;
@@ -24,7 +25,7 @@ public class Movie {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(mappedBy = "movie", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Show> shows;
 }

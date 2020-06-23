@@ -29,12 +29,12 @@ public class Show {
     private List<SeatReserved> reservedSeats;
 
     @ManyToOne
-    @JsonBackReference
+
     @EqualsAndHashCode.Exclude
     private Movie movie;
 
     @ManyToOne
-    @JsonBackReference
+    @JsonManagedReference
     @EqualsAndHashCode.Exclude
     private Room room;
 }
