@@ -26,7 +26,7 @@ public class Seat {
     private Room room;
 
     @OneToMany(mappedBy = "seat", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    @JsonManagedReference
+    @JsonBackReference
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private List<SeatReserved> seatReserved;

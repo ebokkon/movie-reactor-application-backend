@@ -29,7 +29,6 @@ public class Show {
     private List<SeatReserved> reservedSeats;
 
     @ManyToOne
-
     @EqualsAndHashCode.Exclude
     private Movie movie;
 

@@ -1,6 +1,7 @@
 package com.codecool.moviereactorapplication.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import javax.persistence.*;
 
@@ -15,7 +16,7 @@ public class SeatReserved {
     private Long id;
 
     @ManyToOne
-    @JsonBackReference
+    @JsonManagedReference
     private Seat seat;
 
     @ManyToOne
