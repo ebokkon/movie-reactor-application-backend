@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -21,4 +22,10 @@ public class Movie {
 
     @Enumerated(EnumType.STRING)
     private MovieType movieType;
+
+    private Integer movieDbId;
+
+    @OneToMany(mappedBy = "movie", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<Show> shows;
+
 }

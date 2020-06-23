@@ -1,13 +1,12 @@
 package com.codecool.moviereactorapplication.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.codecool.moviereactorapplication.entity.Seat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -25,4 +24,21 @@ public class Room {
 
     private Integer numberOfRows;
     private Integer numberOfSeatsPerRow;
+    private Integer capacity;
+
+    public void setCapacity () {
+        if (numberOfRows != null && numberOfSeatsPerRow != null) {
+            this.capacity = numberOfRows * numberOfSeatsPerRow;
+        }
+    }
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @JsonManagedReference
+    @OneToMany(mappedBy = "room", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<Seat> seats;
+
+    /*public Room() {
+        this.capacity = numberOfRows * numberOfSeatsPerRow;
+    }*/
 }
