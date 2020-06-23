@@ -1,10 +1,9 @@
 package com.codecool.moviereactorapplication.controller;
 
 import com.codecool.moviereactorapplication.entity.Seat;
-import com.codecool.moviereactorapplication.model.SeatReserved;
+import com.codecool.moviereactorapplication.entity.SeatReserved;
 import com.codecool.moviereactorapplication.repository.SeatRepository;
-import com.codecool.moviereactorapplication.service.SeatReservedStorage;
-import com.codecool.moviereactorapplication.service.SeatStorage;
+import com.codecool.moviereactorapplication.repository.SeatReservedRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,26 +14,21 @@ import java.util.List;
 @CrossOrigin
 @RestController
 public class SeatController {
-
-    private final SeatStorage seatStorage;
-    private final SeatReservedStorage seatReservedStorage;
-
     private final SeatRepository seatRepository;
+    private final SeatReservedRepository seatReservedRepository;
 
-    public SeatController(SeatStorage seatStorage, SeatReservedStorage seatReservedStorage, SeatRepository seatRepository) {
-        this.seatStorage = seatStorage;
-        this.seatReservedStorage = seatReservedStorage;
+    public SeatController(SeatRepository seatRepository, SeatReservedRepository seatReservedRepository) {
         this.seatRepository = seatRepository;
+        this.seatReservedRepository = seatReservedRepository;
     }
 
     @GetMapping("/seat/room/{id}")
     public List<Seat> getSeatByRoomId(@PathVariable("id") Long roomId) {
         return seatRepository.getSeatsByRoomId(roomId);
-        //return seatStorage.getSeatsByRoomId(roomId);
     }
 
     @GetMapping("/reserved-seats/show/{id}")
-    public List<SeatReserved> getReservedSeatsByShowId(@PathVariable("id") int showId)  {
-        return seatReservedStorage.getReservedSeatsByShowId(showId);
+    public List<SeatReserved> getReservedSeatsByShowId(@PathVariable("id") Long showId)  {
+        return seatReservedRepository.getReservedSeatsByShowId(showId);
     }
 }
