@@ -1,7 +1,8 @@
 package com.codecool.moviereactorapplication.controller;
 
-import com.codecool.moviereactorapplication.model.Seat;
+import com.codecool.moviereactorapplication.entity.Seat;
 import com.codecool.moviereactorapplication.model.SeatReserved;
+import com.codecool.moviereactorapplication.repository.SeatRepository;
 import com.codecool.moviereactorapplication.service.SeatReservedStorage;
 import com.codecool.moviereactorapplication.service.SeatStorage;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,14 +19,18 @@ public class SeatController {
     private final SeatStorage seatStorage;
     private final SeatReservedStorage seatReservedStorage;
 
-    public SeatController(SeatStorage seatStorage, SeatReservedStorage seatReservedStorage) {
+    private final SeatRepository seatRepository;
+
+    public SeatController(SeatStorage seatStorage, SeatReservedStorage seatReservedStorage, SeatRepository seatRepository) {
         this.seatStorage = seatStorage;
         this.seatReservedStorage = seatReservedStorage;
+        this.seatRepository = seatRepository;
     }
 
     @GetMapping("/seat/room/{id}")
-    public List<Seat> getSeatByRoomId(@PathVariable("id") int roomId) {
-        return seatStorage.getSeatsByRoomId(roomId);
+    public List<Seat> getSeatByRoomId(@PathVariable("id") Long roomId) {
+        return seatRepository.getSeatsByRoomId(roomId);
+        //return seatStorage.getSeatsByRoomId(roomId);
     }
 
     @GetMapping("/reserved-seats/show/{id}")
