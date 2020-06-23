@@ -1,11 +1,8 @@
 package com.codecool.moviereactorapplication.entity;
 
 import com.codecool.moviereactorapplication.model.MovieType;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 import javax.persistence.*;
 import java.util.List;
 
@@ -20,12 +17,14 @@ public class Movie {
     @GeneratedValue
     private Long id;
 
+    private Integer movieDbId;
+
     @Enumerated(EnumType.STRING)
     private MovieType movieType;
 
-    private Integer movieDbId;
-
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @JsonManagedReference
     @OneToMany(mappedBy = "movie", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Show> shows;
-
 }
