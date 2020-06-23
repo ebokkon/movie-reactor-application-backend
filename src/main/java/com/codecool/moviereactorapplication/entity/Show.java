@@ -1,5 +1,7 @@
 package com.codecool.moviereactorapplication.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,13 +19,22 @@ public class Show {
     @GeneratedValue
     private Long id;
 
-    @OneToMany(mappedBy = "show", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    private List<SeatReserved> reservedSeats;
-
     private LocalDate startingDate;
     private LocalTime startingTime;
 
+    @ToString.Exclude
+    @JsonManagedReference
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "show", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<SeatReserved> reservedSeats;
+
     @ManyToOne
+    @JsonBackReference
     @EqualsAndHashCode.Exclude
     private Movie movie;
+
+    @ManyToOne
+    @JsonBackReference
+    @EqualsAndHashCode.Exclude
+    private Room room;
 }
