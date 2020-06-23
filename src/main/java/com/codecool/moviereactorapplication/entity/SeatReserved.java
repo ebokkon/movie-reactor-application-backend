@@ -1,10 +1,7 @@
 package com.codecool.moviereactorapplication.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
 import javax.persistence.*;
 
 @Data
@@ -17,9 +14,11 @@ public class SeatReserved {
     @GeneratedValue
     private Long id;
 
-    @OneToOne
+    @ManyToOne
+    @JsonBackReference
     private Seat seat;
 
     @ManyToOne
+    @JsonBackReference
     private Show show;
 }
