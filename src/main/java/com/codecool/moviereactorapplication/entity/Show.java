@@ -30,6 +30,7 @@ public class Show {
 
     @ManyToOne
     @EqualsAndHashCode.Exclude
+    @JsonManagedReference
     private Movie movie;
 
     @ManyToOne
