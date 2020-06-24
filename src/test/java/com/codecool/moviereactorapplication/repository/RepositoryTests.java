@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -68,6 +69,26 @@ public class RepositoryTests {
                 assertThat(dbShows)
                 .hasSize(1)
                 .allMatch(show1 -> show1.getId() > 0L);
+    }
+
+    @Test
+    public void findMovieByShow() {
+        Movie movie = Movie.builder()
+                .movieDbId(475557)
+                .movieType(MovieType.HU2D)
+                .build();
+        LocalDate date = LocalDate.now();
+        LocalTime startingTime = LocalTime.NOON;
+        Show show = Show.builder()
+                .startingDate(date)
+                .startingTime(startingTime)
+                .movie(movie)
+                .build();
+        showRepository.save(show);
+        movieRepository.saveAndFlush(movie);
+
+        Movie movieByClient = movieRepository.findMovieByShowId(show.getId());
+        assertEquals(movie, movieByClient);
     }
 
 }
