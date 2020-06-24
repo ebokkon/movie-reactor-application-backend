@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -37,6 +38,9 @@ public class RepositoryTests {
 
     @Autowired
     private ShowRepository showRepository;
+
+    @Autowired
+    private TestEntityManager entityManager;
 
     @Test
     public void saveOneMovie() {
@@ -89,6 +93,26 @@ public class RepositoryTests {
 
         Movie movieByClient = movieRepository.findMovieByShowId(show.getId());
         assertEquals(movie, movieByClient);
+    }
+
+    @Test
+    public void showIsDeletedWithMovie() {
+        Movie movie = Movie.builder()
+                .movieDbId(155)
+                .movieType(MovieType.SUB2D)
+                .build();
+        LocalDate date = LocalDate.now();
+        LocalTime startingTime = LocalTime.NOON;
+        Show show = Show.builder()
+                .startingDate(date)
+                .startingTime(startingTime)
+                .movie(movie)
+                .build();
+        movieRepository.save(movie);
+        showRepository.save(show);
+        entityManager.clear();
+        movieRepository.deleteAll();
+        assertThat(showRepository.findAll()).hasSize(0);
     }
 
 }
