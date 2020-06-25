@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 class MovieControllerTest {
@@ -30,11 +31,27 @@ class MovieControllerTest {
                 .build();
         movieRepository.save(movie);
 
+        assertThat(movieRepository.findAll()).hasSize(1);
         assertEquals(movieRepository.findAll(), movieController.getAllScheduledMovie());
     }
 
     @Test
     void testZeroMovieIsScheduled() {
+        assertThat(movieRepository.findAll()).hasSize(0);
+        assertEquals(movieRepository.findAll(), movieController.getAllScheduledMovie());
+    }
+
+    @Test
+    void testMultipleMoviesAreScheduled() {
+        for (int i = 0; i < 10; i++) {
+            Movie movie = Movie.builder()
+                    .movieDbId(1122)
+                    .movieType(MovieType.HU2D)
+                    .build();
+            movieRepository.save(movie);
+        }
+
+        assertThat(movieRepository.findAll()).hasSize(10);
         assertEquals(movieRepository.findAll(), movieController.getAllScheduledMovie());
     }
 }
