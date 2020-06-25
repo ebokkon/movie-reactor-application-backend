@@ -26,7 +26,6 @@ public class SeatReservedOrganiser {
     public boolean saveReservedSeat(SeatReservedWrapper reservationInfo)
             throws IllegalStateException {
         Long showId = reservationInfo.getId();
-        System.out.println(showId);
 
         Show actualShow = showRepository.getShowById(showId);
         if (actualShow == null) {
@@ -34,7 +33,6 @@ public class SeatReservedOrganiser {
         }
 
         List<Long> seatIds = reservationInfo.getSeats();
-        System.out.println(seatIds);
         for (Long actualSeatId : seatIds) {
             Seat actualSeat = seatRepository.getById(actualSeatId);
             if (actualSeat == null) {
