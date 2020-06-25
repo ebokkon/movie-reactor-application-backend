@@ -10,6 +10,10 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Entity
+// TODO: check if possible to give unique constraint for the combination of seat+show
+@Table(uniqueConstraints={
+        @UniqueConstraint(columnNames = {"seat_id", "show_id"}) // Check if this actually works
+})
 public class SeatReserved {
     @Id
     @GeneratedValue
