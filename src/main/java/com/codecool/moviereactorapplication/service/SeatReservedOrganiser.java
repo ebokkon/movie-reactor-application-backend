@@ -33,6 +33,10 @@ public class SeatReservedOrganiser {
         }
 
         List<Long> seatIds = reservationInfo.getSeats();
+        if (seatIds.size() == 0) {
+            return false;
+        }
+
         for (Long actualSeatId : seatIds) {
             Seat actualSeat = seatRepository.getById(actualSeatId);
             if (actualSeat == null) {
