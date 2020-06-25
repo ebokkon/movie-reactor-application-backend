@@ -36,4 +36,16 @@ class RoomControllerTest {
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
+
+    @Test
+    void testForPostMethodThenReturns4xxStatusCode() throws Exception {
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(new RoomController(this.roomRepository)).build();
+        mockMvc.perform(MockMvcRequestBuilders
+                .post("/room/{id}", 1)
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
+
 }
