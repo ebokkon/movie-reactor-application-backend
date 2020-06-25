@@ -4,6 +4,11 @@ target/
 !**/src/main/**
 !**/src/test/**
 
+### H2 Database ###
+jpa_movie_reactor.lock.db
+jpa_movie_reactor.mv.db
+jpa_movie_reactor.trace.db
+
 ### STS ###
 .apt_generated
 .classpath

@@ -1,40 +1,47 @@
 package com.codecool.moviereactorapplication.service;
 
-import com.codecool.moviereactorapplication.model.Seat;
-import com.codecool.moviereactorapplication.model.SeatReserved;
-import com.codecool.moviereactorapplication.model.Show;
+import com.codecool.moviereactorapplication.entity.Seat;
+import com.codecool.moviereactorapplication.entity.SeatReserved;
+import com.codecool.moviereactorapplication.entity.Show;
+import com.codecool.moviereactorapplication.repository.SeatRepository;
+import com.codecool.moviereactorapplication.repository.SeatReservedRepository;
+import com.codecool.moviereactorapplication.repository.ShowRepository;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 @Component
 public class SeatReservedCreator {
-    private final SeatStorage seatStorage;
-    private final ShowStorage showStorage;
-    List<SeatReserved> reservedSeats = new ArrayList<>();
-    private Random random = new Random();
-    private int index = 0;
 
-    public SeatReservedCreator(SeatStorage seatStorage, ShowStorage showStorage) {
-        this.seatStorage = seatStorage;
-        this.showStorage = showStorage;
+    private final SeatReservedRepository seatReservedRepository;
+    private final ShowRepository showRepository;
+    private final SeatRepository seatRepository;
+
+    private final Random random = new Random();
+
+    public SeatReservedCreator(SeatReservedRepository seatReservedRepository,
+                               ShowRepository showRepository,
+                               SeatRepository seatRepository) {
+        this.seatReservedRepository = seatReservedRepository;
+        this.showRepository = showRepository;
+        this.seatRepository = seatRepository;
     }
 
-    public List<SeatReserved> createReservedSeats() {
-        for (Show show : showStorage.getShows()) {
-            int roomId = show.getRoom().getId();
-            List<Seat> seats = seatStorage.getSeatsByRoomId(roomId);
+    public void createReservedSeatsData() {
+        for (Show show : showRepository.findAll()) {
+            Long roomId = show.getRoom().getId();
+            List<Seat> seats = seatRepository.getSeatsByRoomId(roomId);
 
             for (Seat seat : seats) {
                 if (random.nextBoolean()) {
-                    SeatReserved newReservedSeat = new SeatReserved(index, seat, show);
-                    reservedSeats.add(newReservedSeat);
-                    index++;
+                    SeatReserved currentSeat = SeatReserved.builder()
+                            .seat(seat)
+                            .show(show)
+                            .build();
+                    seatReservedRepository.save(currentSeat);
                 }
             }
         }
-        return reservedSeats;
     }
 }
