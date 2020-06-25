@@ -32,4 +32,9 @@ class MovieControllerTest {
 
         assertEquals(movieRepository.findAll(), movieController.getAllScheduledMovie());
     }
+
+    @Test
+    void testZeroMovieIsScheduled() {
+        assertEquals(movieRepository.findAll(), movieController.getAllScheduledMovie());
+    }
 }
