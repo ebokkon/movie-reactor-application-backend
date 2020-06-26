@@ -1,7 +1,7 @@
 package com.codecool.moviereactorapplication.controller;
 
-import com.codecool.moviereactorapplication.model.Movie;
-import com.codecool.moviereactorapplication.service.MovieStorage;
+import com.codecool.moviereactorapplication.entity.Movie;
+import com.codecool.moviereactorapplication.repository.MovieRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,14 +12,14 @@ import java.util.List;
 @RestController
 public class MovieController {
 
-    private final MovieStorage movieStorage;
+    private final MovieRepository movieRepository;
 
-    public MovieController(MovieStorage movieStorage) {
-        this.movieStorage = movieStorage;
+    public MovieController(MovieRepository movieRepository) {
+        this.movieRepository = movieRepository;
     }
 
     @GetMapping("/scheduled-movies")
     public List<Movie> getAllScheduledMovie() {
-        return movieStorage.getAllMovie();
+        return movieRepository.findAll();
     }
 }
