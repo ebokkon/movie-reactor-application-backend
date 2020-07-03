@@ -1,22 +1,23 @@
 package com.codecool.moviereactorapplication.controller;
 
-import com.codecool.moviereactorapplication.model.Room;
-import com.codecool.moviereactorapplication.service.RoomStorage;
+import com.codecool.moviereactorapplication.entity.Room;
+import com.codecool.moviereactorapplication.repository.RoomRepository;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
 @RequestMapping("/room")
 public class RoomController {
+    private final RoomRepository roomRepository;
 
-    private final RoomStorage roomStorage;
-
-    public RoomController(RoomStorage roomStorage) {
-        this.roomStorage = roomStorage;
+    public RoomController(RoomRepository roomRepository) {
+        this.roomRepository = roomRepository;
     }
 
     @GetMapping("/{id}")
-    public Room getRoom(@PathVariable("id") Integer id) {
-        return roomStorage.getRoomById(id);
+    public Optional<Room> getRoom(@PathVariable("id") Long id) {
+        return roomRepository.findById(id);
     }
 }
