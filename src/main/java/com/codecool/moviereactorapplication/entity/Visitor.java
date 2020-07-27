@@ -1,5 +1,6 @@
 package com.codecool.moviereactorapplication.entity;
 
+import com.codecool.moviereactorapplication.model.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,6 +30,8 @@ public class Visitor {
     private String lastname;
 
     private String email;
+
+    private Gender gender;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
