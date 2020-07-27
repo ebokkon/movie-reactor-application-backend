@@ -33,8 +33,8 @@ public class AuthController {
         this.jwtTokenServices = jwtTokenServices;
     }
 
-    @PostMapping("/signin")
-    public ResponseEntity signin(@RequestBody UserCredentials data) {
+    @PostMapping("/login")
+    public ResponseEntity login(@RequestBody UserCredentials data) {
         try {
             String username = data.getUsername();
             // authenticationManager.authenticate calls loadUserByUsername in CustomUserDetailsService
@@ -54,6 +54,11 @@ public class AuthController {
         } catch (AuthenticationException e) {
             throw new BadCredentialsException("Invalid username/password supplied");
         }
+    }
+
+    @PostMapping("/register")
+    public void register(@RequestBody UserCredentials data) {
+        // TODO: Need to implement, return ResponseEntity
     }
 }
 

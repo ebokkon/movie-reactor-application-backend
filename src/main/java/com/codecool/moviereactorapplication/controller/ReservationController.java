@@ -24,4 +24,11 @@ public class ReservationController {
     public boolean saveReservedSeat(@RequestBody SeatReservedWrapper reservationInfoWrapper) throws IllegalStateException {
         return seatReservedOrganiser.saveReservedSeat(reservationInfoWrapper);
     }
+
+    @DeleteMapping("/delete")
+    public boolean deleteReservation(@RequestBody SeatReservedWrapper seats) {
+        return true;
+        // TODO: Need to implement
+    }
+
 }

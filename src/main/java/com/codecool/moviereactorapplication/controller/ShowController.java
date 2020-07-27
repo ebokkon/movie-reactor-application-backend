@@ -2,10 +2,7 @@ package com.codecool.moviereactorapplication.controller;
 
 import com.codecool.moviereactorapplication.entity.Show;
 import com.codecool.moviereactorapplication.repository.ShowRepository;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +24,10 @@ public class ShowController {
     public Show getShowById(@PathVariable("showId") Long showId) {
         return showRepository.getShowById(showId);
 //        return showRepository.getShowAndJoinWithInfo(showId);
+    }
+
+    @PutMapping("/show/{showId}")
+    public void updateShowStartingTime(@PathVariable("showId") Long showId) {
+        // TODO: Need to implement, use PathVariable
     }
 }
