@@ -36,4 +36,7 @@ public class Visitor {
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
     private List<String> roles = new ArrayList<>();
+
+    @ElementCollection
+    private List<Integer> watchList = new ArrayList<>();
 }
