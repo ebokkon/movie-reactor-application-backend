@@ -21,16 +21,22 @@ public class Visitor {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(nullable = false)
     private String username;
 
+    @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
     private String firstname;
 
+    @Column(nullable = false)
     private String lastname;
 
+    @Column(nullable = false)
     private String email;
 
+    @Column(nullable = false)
     private Gender gender;
 
     @ElementCollection(fetch = FetchType.EAGER)
