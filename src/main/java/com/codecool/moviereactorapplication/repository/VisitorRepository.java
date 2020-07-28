@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface VisitorRepository extends JpaRepository<Visitor, Long> {
 
     Optional<Visitor> findByUsername(String username);
+    Visitor getByUsername(String username);
 }
