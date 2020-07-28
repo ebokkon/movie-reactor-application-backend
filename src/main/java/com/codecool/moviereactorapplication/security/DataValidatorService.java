@@ -32,6 +32,38 @@ public class DataValidatorService {
         return valid;
     }
 
+    public boolean isValidPassword(String password, List<String> errorList) {
+        errorList.clear();
+        boolean valid = true;
+        if (password.length() < 8) {
+            errorList.add("at least 8 characters");
+            valid = false;
+        }
+        if (!specialCharacters.matcher(password).find()) {
+            errorList.add("at least 1 special character");
+            valid = false;
+        }
+        if (!upperCaseLetters.matcher(password).find()) {
+            errorList.add("at least 1 uppercase letter");
+            valid = false;
+        }
+        if (!lowerCaseLetters.matcher(password).find()) {
+            errorList.add("at least 1 lowercase letter");
+            valid = false;
+        }
+        if (!digitsPattern.matcher(password).find()) {
+            errorList.add("at least 1 digit");
+            valid = false;
+        }
+        if (password.contains(" ")) {
+            errorList.add("no whitespaces");
+            valid = false;
+        }
+        return valid;
+    }
+
+
+
 
 
 }
