@@ -44,7 +44,7 @@ public class DataProvider implements CommandLineRunner {
         for (Room room : rooms) {
             seatCreator.createSeatsForRoomData(room);
         }
-        showCreator.createWeeklyScheduleData(LocalDate.of(2020, 6, 25));
+        showCreator.createWeeklyScheduleData(LocalDate.of(2020, 7, 30));
         seatReservedCreator.createReservedSeatsData();
 
         visitorCreator.createAdmin();
