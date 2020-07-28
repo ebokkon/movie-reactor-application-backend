@@ -93,6 +93,11 @@ public class DataValidatorService {
         return valid;
     }
 
+    public boolean isValidGender(Gender gender, List<String> errorList) {
+        errorList.clear();
+        List<Gender> genders = Arrays.asList(Gender.GENERAL, Gender.WOMAN, Gender.MAN);
+        return genders.contains(gender);
+    }
 
 }
 
