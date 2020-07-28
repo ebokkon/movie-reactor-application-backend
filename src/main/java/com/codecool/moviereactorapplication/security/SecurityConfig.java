@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/auth/signin").permitAll() // allowed by anyone
+                .antMatchers("/auth/**").permitAll() // allowed by anyone
                 .antMatchers("/me").authenticated()
                 .antMatchers(HttpMethod.GET, "/scheduled-movies").authenticated() // allowed only when signed in
                 .anyRequest().denyAll() // anything else is denied
