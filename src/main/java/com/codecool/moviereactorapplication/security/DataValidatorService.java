@@ -67,6 +67,32 @@ public class DataValidatorService {
         return email.matches(emailPattern);
     }
 
+    public boolean isValidName(String name, List<String> errorList) {
+        errorList.clear();
+        boolean valid = true;
+        if (name.length() < 2) {
+            errorList.add("should be at least 2 characters long");
+            valid = false;
+        }
+        if (name.length() == 0) {
+            errorList.add("cannot leave empty");
+            valid = false;
+        }
+        if (name.contains(" ")) {
+            errorList.add("cannot contain whitespaces");
+            valid = false;
+        }
+        if (specialCharacters.matcher(name).find()) {
+            errorList.add("cannot contain special character");
+            valid = false;
+        }
+        if (digitsPattern.matcher(name).find()) {
+            errorList.add("cannot contain digit");
+            valid = false;
+        }
+        return valid;
+    }
+
 
 }
 
