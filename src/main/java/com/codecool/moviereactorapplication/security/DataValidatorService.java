@@ -62,8 +62,10 @@ public class DataValidatorService {
         return valid;
     }
 
-
-
+    public boolean isValidEmail(String email, List<String> errorList) {
+        errorList.clear();
+        return email.matches(emailPattern);
+    }
 
 
 }
