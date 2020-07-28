@@ -33,7 +33,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                 visitor.getRoles().stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
     }
 
-    public String getCurrentUsername() {
+    public String findLoggedInUsername() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username;
         if (principal instanceof UserDetails) {

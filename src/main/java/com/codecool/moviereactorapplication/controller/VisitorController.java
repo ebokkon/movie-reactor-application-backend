@@ -25,7 +25,7 @@ public class VisitorController {
 
     @GetMapping("/me")
     public String currentUser(){
-        String username = customUserDetailsService.getCurrentUsername();
+        String username = customUserDetailsService.findLoggedInUsername();
         UserDetails visitor = customUserDetailsService.loadUserByUsername(username);
         return username + "\n" + visitor.getAuthorities();
     }
