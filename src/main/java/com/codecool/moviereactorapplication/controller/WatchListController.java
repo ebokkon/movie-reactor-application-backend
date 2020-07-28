@@ -18,8 +18,8 @@ public class WatchListController {
     }
 
     @GetMapping("/user")
-    public void getWatchListByUser() {
-        // TODO: Need to implement and its Repositories, entities. PathVariable
+    public List<Integer> getWatchListByUser() {
+        return visitorRepository.getByUsername("user").getWatchList();
     }
 
     @PostMapping("/save/{movie_db_id}")
@@ -35,8 +35,16 @@ public class WatchListController {
         return true;
     }
 
-    @DeleteMapping("/delete")
-    public void deleteMovieFromWatchList() {
-        // TODO: Need to implement and its Repositories, entities. RequestBody
+    @DeleteMapping("/delete/{movie_db_id}")
+    public boolean deleteMovieFromWatchList(@PathVariable Integer movie_db_id) {
+        if(!visitorRepository.getByUsername("user").getWatchList().contains(movie_db_id)){
+            return false;
+        }
+        Visitor visitor=visitorRepository.getByUsername("user");
+        List<Integer> watchList=visitor.getWatchList();
+        watchList.remove(movie_db_id);
+        visitor.setWatchList(watchList);
+        visitorRepository.save(visitor);
+        return true;
     }
 }
