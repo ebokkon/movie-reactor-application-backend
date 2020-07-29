@@ -69,8 +69,8 @@ public class AuthController {
     public ResponseEntity register(@RequestBody UserCredentials userCredentials) {
         String username = userCredentials.getUsername();
         String password = userCredentials.getPassword();
-        String firstname = userCredentials.getFirstName();
-        String lastname = userCredentials.getLastName();
+        String firstname = userCredentials.getFirstname();
+        String lastname = userCredentials.getLastname();
         String email = userCredentials.getEmail();
         Gender gender = userCredentials.getGender();
 
@@ -98,7 +98,7 @@ public class AuthController {
             return ResponseEntity.ok(model);
         }
 
-        if (dataValidator.isValidName(firstname, errorList)) {
+        if (!dataValidator.isValidName(firstname, errorList)) {
             String error = String.join(" , ", errorList);
             String errorMessage = "Firstname " + error + "!";
             model.put("correct", false);
@@ -106,7 +106,7 @@ public class AuthController {
             return ResponseEntity.ok(model);
         }
 
-        if (dataValidator.isValidName(lastname, errorList)) {
+        if (!dataValidator.isValidName(lastname, errorList)) {
             String error = String.join(" , ", errorList);
             String errorMessage = "Lastname " + error + "!";
             model.put("correct", false);
