@@ -21,11 +21,12 @@ public class DataProvider implements CommandLineRunner {
 
     private final RoomRepository roomRepository;
 
-    private final VisitorCreator visitorCreator;
+    private VisitorCreator visitorCreator;
 
     List<Integer> movieIds = Arrays.asList(496243, 530915, 495764, 514847, 475557, 556678, 111, 122, 155, 501907);
 
-    public DataProvider(RoomCreator roomCreator, MovieCreator movieCreator, SeatCreator seatCreator, ShowCreator showCreator, SeatReservedCreator seatReservedCreator, RoomRepository roomRepository, VisitorCreator visitorCreator) {
+    public DataProvider(RoomCreator roomCreator, MovieCreator movieCreator, SeatCreator seatCreator, ShowCreator showCreator,
+                        SeatReservedCreator seatReservedCreator, RoomRepository roomRepository, VisitorCreator visitorCreator) {
         this.roomCreator = roomCreator;
         this.movieCreator = movieCreator;
         this.seatCreator = seatCreator;

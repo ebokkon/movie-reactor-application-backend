@@ -2,7 +2,6 @@ package com.codecool.moviereactorapplication.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -26,10 +25,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/auth/signin").permitAll() // allowed by anyone
-                .antMatchers("/me").authenticated()
-                .antMatchers(HttpMethod.GET, "/scheduled-movies").authenticated() // allowed only when signed in
-                //.anyRequest().denyAll() // anything else is denied
+                .antMatchers("/").permitAll()
+                .antMatchers("/auth/**").permitAll() // allowed by anyone
+//                .antMatchers("/me").authenticated()
+//                .antMatchers(HttpMethod.GET, "/scheduled-movies").authenticated() // allowed only when signed in
+//                .anyRequest().denyAll() // anything else is denied
+                .anyRequest().permitAll() // anything else is denied
                 .and()
                 .addFilterBefore(new JwtTokenFilter(jwtTokenServices), UsernamePasswordAuthenticationFilter.class);
     }
