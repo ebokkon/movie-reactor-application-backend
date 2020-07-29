@@ -33,8 +33,13 @@ public class ReservationController {
 
     @DeleteMapping("/delete")
     public boolean deleteReservation(@RequestBody SeatReservedWrapper seats) {
-        return true;
-        // TODO: Need to implement
+        Long seatId = seats.getSeats().size() == 1 ? seats.getSeats().get(0) : null;
+        if (seatId != null) {
+            seatReservedRepository.deleteById(seatId);
+            return true;
+        }
+
+        return false;
     }
 
     @GetMapping("/seats")
