@@ -4,8 +4,10 @@ import com.codecool.moviereactorapplication.entity.Visitor;
 import com.codecool.moviereactorapplication.repository.VisitorRepository;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin
 @RestController("/watchlist")
@@ -18,8 +20,15 @@ public class WatchListController {
     }
 
     @GetMapping("/user")
-    public List<Integer> getWatchListByUser() {
-        return visitorRepository.getByUsername("user").getWatchList();
+    public List<Map<String,Integer>> getWatchListByUser() {
+        List<Map<String,Integer>> returnList=new ArrayList<>();
+        List<Integer> idList=visitorRepository.getByUsername("user").getWatchList();
+        for(int id : idList){
+            Map<String,Integer> data=new HashMap<>();
+            data.put("id",id);
+            returnList.add(data);
+        }
+        return returnList;
     }
 
     @PostMapping("/save/{movie_db_id}")
