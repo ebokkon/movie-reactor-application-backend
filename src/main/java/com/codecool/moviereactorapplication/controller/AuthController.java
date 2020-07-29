@@ -43,25 +43,24 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody UserCredentials data) {
-        try {
-            String username = data.getUsername();
-            // authenticationManager.authenticate calls loadUserByUsername in CustomUserDetailsService
-            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, data.getPassword()));
-            List<String> roles = authentication.getAuthorities()
-                    .stream()
-                    .map(GrantedAuthority::getAuthority)
-                    .collect(Collectors.toList());
-
+    public ResponseEntity login(@RequestBody UserCredentials userCredentials){
+        Map<Object, Object> model = new HashMap<>();
+        try{
+            String username = userCredentials.getUsername();
+            String password = userCredentials.getPassword();
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+            List<String> roles = authentication.getAuthorities().stream()
+                    .map(GrantedAuthority::getAuthority).collect(Collectors.toList());
             String token = jwtTokenServices.createToken(username, roles);
-
-            Map<Object, Object> model = new HashMap<>();
+            model.put("correct", true);
             model.put("username", username);
             model.put("roles", roles);
             model.put("token", token);
             return ResponseEntity.ok(model);
-        } catch (AuthenticationException e) {
-            throw new BadCredentialsException("Invalid username/password supplied");
+        } catch (AuthenticationException e){
+            model.put("correct", false);
+            model.put("msg", "Username or/and password is not correct!");
+            return ResponseEntity.ok(model);
         }
     }
 
