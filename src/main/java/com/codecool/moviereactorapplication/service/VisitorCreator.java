@@ -1,6 +1,7 @@
 package com.codecool.moviereactorapplication.service;
 
 import com.codecool.moviereactorapplication.entity.Visitor;
+import com.codecool.moviereactorapplication.model.Gender;
 import com.codecool.moviereactorapplication.repository.VisitorRepository;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,6 +29,7 @@ public class VisitorCreator {
                 .email("admin@gmail.com")
                 .firstname("Klari")
                 .lastname("Tolnai")
+                .gender(Gender.GENERAL)
                 .roles(Arrays.asList("ROLE_ADMIN", "ROLE_USER"))
                 .build();
         visitorRepository.save(admin);
@@ -40,6 +42,7 @@ public class VisitorCreator {
                 .email("user@gmail.com")
                 .firstname("Dani")
                 .lastname("Kovats D.")
+                .gender(Gender.MAN)
                 .roles(Collections.singletonList("ROLE_USER"))
                 .build();
         visitorRepository.save(user);
