@@ -16,8 +16,8 @@ public interface SeatReservedRepository extends JpaRepository<SeatReserved, Long
 
     SeatReserved getSeatReservedBySeatAndShow(Seat seat, Show show);
 
-    @Query(value="SELECT NEW com.codecool.moviereactorapplication.model.SeatReservedWithDetails(sr.id, s.id, s.startingDate, s.startingTime, m.movieDbId) " +
-            "FROM SeatReserved AS sr JOIN Show s ON sr.show.id = s.id JOIN Movie m on s.movie.id = m.id " +
+    @Query(value = "SELECT NEW com.codecool.moviereactorapplication.model.SeatReservedWithDetails(sr.id, s.id, s.startingDate, s.startingTime, m.movieDbId, st.rowNumber, st.seatNumber) " +
+            "FROM SeatReserved AS sr JOIN Seat st ON sr.seat.id = st.id JOIN Show s ON sr.show.id = s.id JOIN Movie m on s.movie.id = m.id " +
             "ORDER BY s.startingDate"
     )
     List<SeatReservedWithDetails> getAllReservationsWithDetails();
