@@ -22,5 +22,8 @@ public interface SeatReservedRepository extends JpaRepository<SeatReserved, Long
     )
     List<SeatReservedWithDetails> getAllReservationsWithDetails();
 
+    // TODO: Need to watch this query, can be a problem with it.
+    void deleteById(Long Id);
+
     // TODO: Need to implement a query for: Get reserved seats by User, order by date, group by movie for easier display.
 }
