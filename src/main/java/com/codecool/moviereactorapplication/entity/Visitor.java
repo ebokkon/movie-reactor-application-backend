@@ -1,6 +1,7 @@
 package com.codecool.moviereactorapplication.entity;
 
 import com.codecool.moviereactorapplication.model.Gender;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,6 +26,7 @@ public class Visitor {
     private String username;
 
     @Column(nullable = false)
+    @JsonIgnore
     private String password;
 
     @Column(nullable = false)
