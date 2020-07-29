@@ -27,9 +27,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/auth/signin").permitAll() // allowed by anyone
-                .antMatchers("/me").authenticated()
-                .antMatchers(HttpMethod.GET, "/scheduled-movies").authenticated() // allowed only when signed in
-                .anyRequest().denyAll() // anything else is denied
+                //.antMatchers("/reservation/delete").permitAll() // allowed by anyone ONLY FOR TEST
+                //.antMatchers("/me").authenticated()
+                //.antMatchers(HttpMethod.GET, "/scheduled-movies").authenticated() // allowed only when signed in
+                //.anyRequest().denyAll() // anything else is denied
                 .and()
                 .addFilterBefore(new JwtTokenFilter(jwtTokenServices), UsernamePasswordAuthenticationFilter.class);
     }
