@@ -21,5 +21,7 @@ public class SeatReservedWithDetails {
     private LocalDate startingDate;
     private LocalTime startingTime;
     private Integer movieDbId;
+    private Integer rowNumber;
+    private Integer seatNumber;
 
 }
