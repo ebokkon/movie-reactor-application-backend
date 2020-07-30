@@ -23,7 +23,7 @@ public class DataProvider implements CommandLineRunner {
 
     private VisitorCreator visitorCreator;
 
-    List<Integer> movieIds = Arrays.asList(496243, 530915, 495764, 514847, 475557, 556678, 111, 122, 155, 501907);
+    List<Integer> movieIds = Arrays.asList(496243, 495764, 475557, 155, 501907);
 
     public DataProvider(RoomCreator roomCreator, MovieCreator movieCreator, SeatCreator seatCreator, ShowCreator showCreator,
                         SeatReservedCreator seatReservedCreator, RoomRepository roomRepository, VisitorCreator visitorCreator) {
