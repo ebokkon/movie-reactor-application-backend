@@ -18,7 +18,7 @@ public class VisitorController {
 
     private final VisitorRepository allVisitors;
 
-    @GetMapping("/get-all-users")
+    @GetMapping("/users")
     public List<Visitor> getAllUsers() {
         return allVisitors.findAll();
     }
