@@ -52,10 +52,12 @@ public class AuthController {
             List<String> roles = authentication.getAuthorities().stream()
                     .map(GrantedAuthority::getAuthority).collect(Collectors.toList());
             String token = jwtTokenServices.createToken(username, roles);
+            String gender = allVisitors.getGenderByUsername(username).getGender().toString();
             model.put("correct", true);
             model.put("username", username);
             model.put("roles", roles);
             model.put("token", token);
+            model.put("gender", gender);
             return ResponseEntity.ok(model);
         } catch (AuthenticationException e){
             model.put("correct", false);
