@@ -23,7 +23,6 @@ public class ShowController {
     @GetMapping("/show/{showId}")
     public Show getShowById(@PathVariable("showId") Long showId) {
         return showRepository.getShowById(showId);
-//        return showRepository.getShowAndJoinWithInfo(showId);
     }
 
     @PutMapping("/show/{showId}")
