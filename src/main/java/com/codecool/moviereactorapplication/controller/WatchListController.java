@@ -12,7 +12,8 @@ import java.util.Map;
 import com.codecool.moviereactorapplication.security.CustomUserDetailsService;
 
 @CrossOrigin("http://localhost:3000")
-@RestController("/watchlist")
+@RestController
+@RequestMapping("/watchlist")
 public class WatchListController {
 
     private final VisitorRepository visitorRepository;
