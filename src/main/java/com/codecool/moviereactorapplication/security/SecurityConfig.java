@@ -35,8 +35,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
 //                .antMatchers("/").permitAll()
-//                .antMatchers("/auth/*").permitAll()
-                .antMatchers("/*").permitAll()
+                .antMatchers("/auth/*").permitAll()
+                .antMatchers(HttpMethod.GET,"/watchlist").hasRole("USER")
+                .antMatchers(HttpMethod.POST,"/watchlist/save/*").hasRole("USER")
+                .antMatchers(HttpMethod.DELETE,"/watchlist/delete/*").hasRole("USER")
 //                .antMatchers("/top").permitAll()
 //                .antMatchers(HttpMethod.GET, "/scheduled-movies").permitAll()
 //                .antMatchers("/reservation/*").hasRole("USER")
@@ -46,10 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers(HttpMethod.GET,"/schedule").permitAll()
 //                .antMatchers(HttpMethod.GET,"/show/*").permitAll()
 //                .antMatchers(HttpMethod.PUT,"/show/*").hasRole("ADMIN")
-//                .antMatchers(HttpMethod.GET,"/watchlist/user").hasRole("USER")
-//                .antMatchers(HttpMethod.POST,"/watchlist/save").permitAll()
-//                .antMatchers(HttpMethod.DELETE,"/watchlist/delete/*").hasRole("USER")
-//                .anyRequest().denyAll() // anything else is denied
+                .anyRequest().denyAll() // anything else is denied
                 .and()
                 .addFilterBefore(new JwtTokenFilter(jwtTokenServices), UsernamePasswordAuthenticationFilter.class);
     }
