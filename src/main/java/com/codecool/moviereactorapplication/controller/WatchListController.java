@@ -11,7 +11,7 @@ import java.util.Map;
 
 import com.codecool.moviereactorapplication.security.CustomUserDetailsService;
 
-@CrossOrigin
+@CrossOrigin("http://localhost:3000")
 @RestController("/watchlist")
 public class WatchListController {
 
