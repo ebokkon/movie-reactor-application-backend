@@ -34,7 +34,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-//                .antMatchers("/").permitAll()
                 .antMatchers("/auth/*").permitAll()
                 .antMatchers(HttpMethod.GET, "/watchlist").hasRole("USER")
                 .antMatchers(HttpMethod.POST, "/watchlist/save/*").hasRole("USER")
@@ -48,11 +47,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST,"/reservation/seats").hasRole("USER")
                 .antMatchers(HttpMethod.GET,"/reservation/seats").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE,"/reservation/delete").hasRole("ADMIN")
-//                .antMatchers("/top").permitAll()
-//                .antMatchers(HttpMethod.GET,"/room/*").permitAll()
-//                .antMatchers(HttpMethod.GET,"/seat/room/*").permitAll()
-//                .antMatchers(HttpMethod.GET,"/reserved-seats/show/*").permitAll()
-
                 .anyRequest().denyAll() // anything else is denied
                 .and()
                 .addFilterBefore(new JwtTokenFilter(jwtTokenServices), UsernamePasswordAuthenticationFilter.class);
@@ -69,9 +63,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.addAllowedOrigin("http://localhost:3000");
         configuration.setAllowCredentials(true);
-//        configuration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-*", "Origin", "Content-type", "Accept", "Authorization"));
+        // configuration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-*", "Origin", "Content-type", "Accept", "Authorization"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
-//        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PUT", "DELETE"));
+        // configuration.setAllowedMethods(Arrays.asList("GET","POST", "PUT", "DELETE"));
         configuration.setAllowedMethods(Arrays.asList("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
