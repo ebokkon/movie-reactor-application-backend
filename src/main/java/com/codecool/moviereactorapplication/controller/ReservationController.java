@@ -32,6 +32,7 @@ public class ReservationController {
     }
 
     @DeleteMapping("/delete")
+    // TODO: Only for admin and user too!
     public boolean deleteReservation(@RequestBody SeatReservedWrapper seats) {
         Long seatId = seats.getSeats().size() == 1 ? seats.getSeats().get(0) : null;
         if (seatId != null) {
@@ -43,6 +44,7 @@ public class ReservationController {
     }
 
     @GetMapping("/seats")
+    // TODO: Only for admin, user should reach only user's seats!
     public List<SeatReservedWithDetails> getAllReservedSeats() {
         return seatReservedRepository.getAllReservationsWithDetails();
     }
