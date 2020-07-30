@@ -2,6 +2,7 @@ package com.codecool.moviereactorapplication.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -30,11 +31,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/auth/signin").permitAll() // allowed by anyone
-                //.antMatchers("/reservation/delete").permitAll() // allowed by anyone ONLY FOR TEST
-                //.antMatchers("/me").authenticated()
-                //.antMatchers(HttpMethod.GET, "/scheduled-movies").authenticated() // allowed only when signed in
-                //.anyRequest().denyAll() // anything else is denied
+                .antMatchers("/").permitAll()
+                .antMatchers("/auth/*").permitAll()
+                .antMatchers("/top").permitAll()
+                .antMatchers(HttpMethod.GET, "/scheduled-movies").permitAll()
+                .antMatchers("/reservation/*").hasRole("USER")
+                .antMatchers(HttpMethod.GET,"/room/*").permitAll()
+                .antMatchers(HttpMethod.GET,"/seat/room/*").permitAll()
+                .antMatchers(HttpMethod.GET,"/reserved-seats/show/*").permitAll()
+                .antMatchers(HttpMethod.GET,"/schedule").permitAll()
+                .antMatchers(HttpMethod.GET,"/show/*").permitAll()
+                .antMatchers(HttpMethod.PUT,"/show/*").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET,"/watchlist/user").hasRole("USER")
+                .antMatchers(HttpMethod.POST,"/watchlist/save/*").hasRole("USER")
+                .antMatchers(HttpMethod.DELETE,"/watchlist/delete/*").hasRole("USER")
+                .anyRequest().denyAll() // anything else is denied
                 .and()
                 .addFilterBefore(new JwtTokenFilter(jwtTokenServices), UsernamePasswordAuthenticationFilter.class);
     }
