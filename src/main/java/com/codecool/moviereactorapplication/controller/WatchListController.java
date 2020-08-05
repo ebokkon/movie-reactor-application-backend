@@ -25,13 +25,13 @@ public class WatchListController {
     }
 
     @GetMapping
-    public List<Map<String, Integer>> getWatchListByUser(@RequestHeader String username) {
+    public List<Map<String, Integer>> getWatchListByUser() {
+        String username = customUserDetailsService.findLoggedInUsername();
         List<Map<String, Integer>> returnList = new ArrayList<>();
         if (username == null) {
             return null;
         } else {
             List<Integer> idList = visitorRepository.getByUsername(username).getWatchList();
-
             for (int id : idList) {
                 Map<String, Integer> data = new HashMap<>();
                 data.put("id", id);
@@ -42,7 +42,8 @@ public class WatchListController {
     }
 
     @PostMapping("/save/{movie_db_id}")
-    public boolean saveMovieIntoWatchList(@RequestHeader String username, @PathVariable Integer movie_db_id) {
+    public boolean saveMovieIntoWatchList(@PathVariable Integer movie_db_id) {
+        String username = customUserDetailsService.findLoggedInUsername();
         Visitor visitor;
         if (username != null) {
             visitor = visitorRepository.getByUsername(username);
