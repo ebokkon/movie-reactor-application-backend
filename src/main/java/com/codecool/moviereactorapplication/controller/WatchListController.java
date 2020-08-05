@@ -61,7 +61,8 @@ public class WatchListController {
     }
 
     @DeleteMapping("/delete/{movie_db_id}")
-    public boolean deleteMovieFromWatchList(@PathVariable Integer movie_db_id, @RequestHeader String username) {
+    public boolean deleteMovieFromWatchList(@PathVariable Integer movie_db_id) {
+        String username = customUserDetailsService.findLoggedInUsername();
         if (!visitorRepository.getByUsername(username).getWatchList().contains(movie_db_id)) {
             return false;
         }
@@ -72,23 +73,5 @@ public class WatchListController {
         visitorRepository.save(visitor);
         return true;
     }
-
-
-//    @GetMapping("/user/{id}")
-//    public List<Long> getWatchListByUser(@PathVariable("user_id") Long userId) {
-//        return allVisitors.getWatchListByUser(userId);
-//    }
-//
-//    @GetMapping("/save")
-//    public void saveMovieIntoWatchList(@RequestParam("movie_id") Long movieId) {
-//        String username = customUserDetailsService.findLoggedInUsername();
-//        if (username != null) {
-//            Visitor user = allVisitors.findUserByUsername(username);
-//            List<Long> watchList = allVisitors.getWatchListByUser(user.getId());
-//            watchList.add(movieId);
-//            user.setWatchListMovieIds(watchList);
-//            allVisitors.save(user);
-//        }
-//    }
 
 }
